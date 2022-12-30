@@ -10,52 +10,52 @@ public class AnalyseLexicale {
             {        0 ,    1 ,    6 ,  13 ,   23 ,   28 ,  33 ,     0 ,     0,    0 ,    0 ,    0 },
             {     null , null , null, null , null , null, null ,  null ,  null,    2 , null , null },
             {     null , null , null, null , null , null, null ,  null ,     3,  null, null , null },
-            {     null , null , null, null , null , null, null ,  null ,     3,  null, null ,    4 },
+            {     null , null , null, null , null , null, null ,  null ,  null,  null, null ,    4 },
             {     null , null , null, null , null , null, null ,  null ,     5,  null, null , null },
-            {     null , null , null, null , null , null, null ,  null ,     5,  null,  101 , null },
+            {     null , null , null, null , null , null, null ,  null ,  null,  null,  101 , null },
             {     null , null , null, null , null , null, null ,  null ,  null,     7, null , null },
             {     null , null , null, null , null , null, null ,  null ,     8,  null, null , null },
-            {     null , null , null, null , null , null, null ,  null ,     8,  null, null ,    9 },
+            {     null , null , null, null , null , null, null ,  null ,  null,  null, null ,    9 },
             {     null , null , null, null , null , null, null ,  null ,    10,  null, null , null },
-            {     null , null , null, null , null , null, null ,  null ,    10,  null, null ,   11 },
+            {     null , null , null, null , null , null, null ,  null ,  null,  null, null ,   11 },
             {     null , null , null, null , null , null, null ,  null ,    12,  null, null , null },
             {     null , null , null, null , null , null, null ,  null ,  null,  null,  102 , null },
             {     null , null , null, null , null , null, null ,  null ,  null,    14, null , null },
             {     null , null , null, null , null , null, null ,  null ,    15,  null, null , null },
-            {     null , null , null, null , null , null, null ,  null ,    15,  null, null ,   16 },
+            {     null , null , null, null , null , null, null ,  null ,  null,  null, null ,   16 },
             {     null , null , null, null , null , null, null ,  null ,    17,  null, null , null },
             {     null , null , null, null , null , null, null ,    18 ,  null,  null, null , null },
             {     null , null , null, null , null , null, null ,  null ,  null,  null, null ,   19 },
             {     null , null , null, null , null , null, null ,  null ,    20,  null, null , null },
-            {     null , null , null, null , null , null, null ,  null ,    20,  null, null ,   21 },
+            {     null , null , null, null , null , null, null ,  null ,  null,  null, null ,   21 },
             {     null , null , null, null , null , null, null ,  null ,    22,  null, null , null },
-            {     null , null , null, null , null , null, null ,  null ,    22,  null,  103 , null },
+            {     null , null , null, null , null , null, null ,  null ,  null,  null,  103 , null },
             {     null , null , null, null , null , null, null ,  null ,  null,    24, null , null },
             {     null , null , null, null , null , null, null ,  null ,    25,  null, null , null },
-            {     null , null , null, null , null , null, null ,  null ,    25,  null, null ,   26 },
+            {     null , null , null, null , null , null, null ,  null ,  null,  null, null ,   26 },
             {     null , null , null, null , null , null, null ,  null ,    27,  null, null , null },
-            {     null , null , null, null , null , null, null ,  null ,    27,  null,  104 , null },
+            {     null , null , null, null , null , null, null ,  null ,  null,  null,  104 , null },
             {     null , null , null, null , null , null, null ,  null ,  null,    29, null , null },
             {     null , null , null, null , null , null, null ,  null ,    30,  null, null , null },
-            {     null , null , null, null , null , null, null ,  null ,    30,  null, null ,   31 },
+            {     null , null , null, null , null , null, null ,  null ,  null,  null, null ,   31 },
             {     null , null , null, null , null , null, null ,  null ,    32,  null, null , null },
-            {     null , null , null, null , null , null, null ,  null ,    32,  null,  105 , null },
+            {     null , null , null, null , null , null, null ,  null ,  null,  null,  105 , null },
             {     null , null , null, null , null , null, null ,  null ,  null,    34, null , null },
             {     null , null , null, null , null , null, null ,  null ,    35,  null, null , null },
-            {     null , null , null, null , null , null, null ,  null ,    35,  null, null ,   36 },
+            {     null , null , null, null , null , null, null ,  null ,  null,  null, null ,   36 },
             {     null , null , null, null , null , null, null ,  null ,    37,  null, null , null },
-            {     null , null , null, null , null , null, null ,  null ,    37,  null, null ,   38 },
+            {     null , null , null, null , null , null, null ,  null ,  null,  null, null ,   38 },
             {     null , null , null, null , null , null, null ,    39 ,  null,  null, null , null },
             {     null , null , null, null , null , null, null ,  null ,  null,  null,  106 , null },
             {     null , null , null, null , null , null, null ,  null ,  null,    41, null , null },
             {     null , null , null, null , null , null, null ,  null ,    42,  null, null , null },
-            {     null , null , null, null , null , null, null ,  null ,    42,  null, null ,   43 },
+            {     null , null , null, null , null , null, null ,  null ,  null,  null, null ,   43 },
             {     null , null , null, null , null , null, null ,  null ,    44,  null, null , null },
-            {     null , null , null, null , null , null, null ,  null ,    44,  null, null ,   45 },
+            {     null , null , null, null , null , null, null ,  null ,  null,  null, null ,   45 },
             {     null , null , null, null , null , null, null ,  null ,    46,  null, null , null },
-            {     null , null , null, null , null , null, null ,  null ,    46,  null, null ,   47 },
+            {     null , null , null, null , null , null, null ,  null ,  null,  null, null ,   47 },
             {     null , null , null, null , null , null, null ,  null ,    48,  null, null , null },
-            {     null , null , null, null , null , null, null ,  null ,    48,  null,  107 , null },
+            {     null , null , null, null , null , null, null ,  null ,  null,  null,  107 , null },
 
 
     };
@@ -96,19 +96,27 @@ public class AnalyseLexicale {
                 if (e == 101||e == 102||e == 103||e == 104||e == 105||e == 106||e == 107) {
                     tokens.add(new Token(TypedeToken.ParD));
                 } else if (e == 3||e == 5||e == 8 ||e == 10||e == 12||e == 15||e == 17||e == 20||e == 22||e == 25||e == 27||e == 30||e == 32||e == 35||e == 37||e == 42||e == 44||e == 46||e == 48  ) {
-                    tokens.add(new Token(TypedeToken.intval,buf));
-                } else if () {
-                    tokens.add(new Token(TypedeToken.ParD));
-                } else if () {
-                    tokens.add(new Token(TypedeToken.ParD));
-                } else if () {
-                    tokens.add(new Token(TypedeToken.ParD));
-                } else if () {
-                    tokens.add(new Token(TypedeToken.ParD));
+                    tokens.add(new Token(TypedeToken.intval));
                     retourArriere();
-                } else if () {
-                    tokens.add(new Token(TypedeToken.ParD));
-
+                } else if (e == 18 || e == 39) {
+                    tokens.add(new Token(TypedeToken.chard));
+                } else if (e == 2 || e == 7 || e == 14 || e == 29 || e == 24 || e == 34 || e == 41 ) {
+                    tokens.add(new Token(TypedeToken.ParG));
+                } else if (e == 4 || e == 9 || e == 11 || e == 16 || e == 19 || e == 21 || e == 26 || e == 31 || e == 36 || e == 38  || e == 43 || e == 45 || e == 47) {
+                    tokens.add(new Token(TypedeToken.virgule));
+                } else if (e == 1) {
+                tokens.add(new Token(TypedeToken.m));
+                } else if ( e == 6 ) {
+                tokens.add(new Token(TypedeToken.h));
+                } else if (e == 13) {
+                tokens.add(new Token(TypedeToken.t));
+                retourArriere();
+                } else if (e == 23) {
+                tokens.add(new Token(TypedeToken.p));
+                } else if (e == 28) {
+                tokens.add(new Token(TypedeToken.s));
+                } else if (e == 33) {
+                    tokens.add(new Token(TypedeToken.f));
                 }
                 // un état d'acceptation ayant été atteint, retourne à l'état 0
                 etat = 0;
