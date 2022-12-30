@@ -92,7 +92,7 @@ public class AnalyseLexicale {
                 throw new LexicalErrorException("pas de transition depuis état " + etat + " avec symbole " + c);
             }
             // cas particulier lorsqu'un état d'acceptation est atteint
-            if (e >= 1) {
+            if (e != 0 ) {
                 if (e == 101||e == 102||e == 103||e == 104||e == 105||e == 106||e == 107) {
                     tokens.add(new Token(TypedeToken.ParD));
                 } else if (e == 3||e == 5||e == 8 ||e == 10||e == 12||e == 15||e == 17||e == 20||e == 22||e == 25||e == 27||e == 30||e == 32||e == 35||e == 37||e == 42||e == 44||e == 46||e == 48  ) {
