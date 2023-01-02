@@ -13,11 +13,11 @@ public class AnalyseSyntaxique {
         effectue l'analyse syntaxique à partir de la liste de tokens
         et retourne le noeud racine de l'arbre syntaxique abstrait
          */
-        public Integer analyse(List<Token> tokens) throws Exception {
+        public String analyse(List<Token> tokens) throws Exception {
             this.pos = 0;
             this.tokens = tokens;
             this.niveauIndentation = 0;
-            Integer res = S();
+            String res = V();
             if (pos != tokens.size()) {
                 System.out.println("L'analyse syntaxique s'est terminé avant l'examen de tous les tokens");
                 throw new IncompleteParsingException();
@@ -27,55 +27,94 @@ public class AnalyseSyntaxique {
 
 	/*
 
-	Traite la dérivation du symbole non-terminal S
+	Traite la dérivation du symbole non-terminal V
 
-	S -> A S'
+	V -> T | M | S | C |  P | F | T | H
 
 	 */
 
-        private Integer S() throws UnexpectedTokenException {
+        private String V() throws UnexpectedTokenException {
 
-            if (getTypeDeToken() == TypedeToken.intVal ||
-                    getTypeDeToken() == TypedeToken.leftPar) {
+            if (getTypeDeToken() == TypedeToken.m ) {
 
-                // production S -> A S'
-
+                // production S ->
+                Token t = lireToken();
+                printToken("m");
                 niveauIndentation++;
-                Integer a = A();
+                String m = M();
                 niveauIndentation--;
-                return S_prime(a);
+                return V();
             }
-            throw new UnexpectedTokenException("intVal ou ( attendu");
+            throw new UnexpectedTokenException("lettre d'attributs attendu");
+
+          /*  if (getTypeDeToken() == TypedeToken.c ) {
+                Token t = lireToken();
+                printToken("c");
+                niveauIndentation++;
+                String c = C();
+
+           }  throw new UnexpectedTokenException("lettre d'attributs attendu"); */
+
+            if (getTypeDeToken() == TypedeToken.p) {
+                Token t = lireToken();
+                printToken("p");
+                niveauIndentation++;
+                String p = P();
+
+            }  throw new UnexpectedTokenException("lettre d'attributs attendu");
+
+            if (getTypeDeToken() == TypedeToken.f ) {
+                Token t = lireToken();
+                printToken("f");
+                niveauIndentation++;
+                String f = F();
+
+            }  throw new UnexpectedTokenException("lettre d'attributs attendu");
+
+            if (getTypeDeToken() == TypedeToken.t ) {
+                Token t = lireToken();
+                printToken("t");
+                niveauIndentation++;
+                String trap = T();
+
+            }  throw new UnexpectedTokenException("lettre d'attributs attendu");
+
+            if (getTypeDeToken() == TypedeToken.h ) {
+                Token t = lireToken();
+                printToken("h");
+                niveauIndentation++;
+                String h =  H();
+
+            }  throw new UnexpectedTokenException("lettre d'attributs attendu");
         }
 
 	/*
 
 	Traite la dérivation du symbole non-terminal S'
 
-	S' -> + S | epsilon
+	S' -> ) V | epsilon
 
 	 */
 
-        private Integer S_prime(Integer i) throws UnexpectedTokenException {
+        private String M(String ) throws UnexpectedTokenException {
 
-            if (getTypeDeToken() == TypedeToken.add) {
+            if (getTypeDeToken() == TypedeToken.ParG ) {
 
                 // production S' -> + S
 
                 Token t = lireToken();
-                printToken("+");
+                printToken("(");
                 niveauIndentation++;
-                Integer s = S();
-                niveauIndentation--;
-                return i + s;
+                String s = S();
+
             }
 
-            if (getTypeDeToken() == TypedeToken.rightPar ||
+            if (getTypeDeToken() == TypedeToken.ParD ||
                     finAtteinte()) {
 
                 // production S' -> epsilon
 
-                return i;
+                return null ;
             }
 
             throw new UnexpectedTokenException("+ ou ) attendu");
@@ -89,15 +128,15 @@ public class AnalyseSyntaxique {
 
 	 */
 
-        private Integer A() throws UnexpectedTokenException {
+        private String S(String s) throws UnexpectedTokenException {
 
-            if (getTypeDeToken() == TypedeToken.leftPar) {
+            if (getTypeDeToken() == TypedeToken.intval) {
 
                 // production A -> ( S ) A'
 
-                lireToken();
+                Token t = lireToken() ;
                 niveauIndentation++;
-                Integer s = S();
+                String s = C();
                 niveauIndentation--;
 
                 if (getTypeDeToken() == TypedeToken.rightPar) {
@@ -130,13 +169,13 @@ public class AnalyseSyntaxique {
 
 	 */
 
-        private Integer A_prime(Integer i) throws UnexpectedTokenException {
-            if (getTypeDeToken() == TypedeToken.multiply) {
+        private String C() throws UnexpectedTokenException {
+            if (getTypeDeToken() == TypedeToken.virgule) {
 
                 // production A' -> * A
 
                 Token t = lireToken();
-                printToken("*");
+                printToken(",");
                 niveauIndentation++;
                 Integer a = A();
                 niveauIndentation--;
@@ -154,6 +193,12 @@ public class AnalyseSyntaxique {
             throw new UnexpectedTokenException("*, +, ) ou fin d'entrée attendu");
 
         }
+    private String P() throws UnexpectedTokenException {return null ;}
+    private String D() throws UnexpectedTokenException {return null ;}
+    private String T() throws UnexpectedTokenException {return null ;}
+    private String H() throws UnexpectedTokenException {return null ;}
+    private String F() throws UnexpectedTokenException {return null ;}
+
 
 	/*
 

@@ -11,5 +11,7 @@ public enum TypedeToken {
     s,
     f,
     chard,
-    intval
+    intval ,
+    c
+
 }
