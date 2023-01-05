@@ -7,7 +7,7 @@ direction : dans quelle direction aller pour passer dans la trappe
 destination_x,destination_y : ou mène la trappe
 */
 
-class Trappe {
+public class Trappe {
     private int x;
     private int y;
     private Direction direction;

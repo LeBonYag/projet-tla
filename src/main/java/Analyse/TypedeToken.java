@@ -9,6 +9,11 @@ public enum TypedeToken {
     p,
     s,
     f,
-    c
+    c ,
+    parD ,
+    parG ,
+    intval ,
+    chard ,
+    virgule
 
 }

@@ -16,7 +16,7 @@ import java.util.Date;
 
 import static tla.Direction.*;
 
-class Plateau {
+public class Plateau {
 
     final String message = "r : redémarrer la partie / q : quitter pour le menu";
 

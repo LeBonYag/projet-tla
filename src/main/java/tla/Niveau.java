@@ -36,6 +36,10 @@ abstract class Niveau {
     List<Chrono> CHRONOS;
 
     /*
+    Liste de Mur
+     */
+    List<Carreau> CARREAUX ;
+    /*
     placement des portes fermées selon l'état des commutateurs, à appliquer
     à l'initialisation du niveau et après chaque déplacement du joueur
 

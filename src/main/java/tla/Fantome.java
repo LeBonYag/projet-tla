@@ -10,7 +10,7 @@ import java.util.List;
 /*
 gère le comportement d'un fantôme, à l'aide d'une séquence de direction
 */
-class Fantome {
+public class Fantome {
 
     // position de début de séquence du fantome
     private int depart_x;

@@ -7,7 +7,7 @@ Attention à ne pas confondre la description d'un commutateur (décrit dans cett
 et les effets des commutateurs sur les portes fermées (doivent être décrit dans hookApresDeplacement)
 */
 
-class Commutateur {
+public class Commutateur {
     private int x;
     private int y;
     private boolean etat;
