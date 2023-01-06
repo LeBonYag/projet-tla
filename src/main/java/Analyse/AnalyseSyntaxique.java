@@ -1,16 +1,18 @@
-package Analyse;
+package Analyse ;
 
-import Analyse.Token;
+
 import tla.*;
 
 import java.util.List;
 
-public class AnalyseSyntaxique   {
+import static Analyse.TypedeToken.m;
+
+
+public class AnalyseSyntaxique {
 
     private int pos;
     private List<Token> tokens;
     private int niveauIndentation;
-
 
     /*
     effectue l'analyse syntaxique à partir de la liste de tokens
@@ -20,7 +22,7 @@ public class AnalyseSyntaxique   {
         this.pos = 0;
         this.tokens = tokens;
         this.niveauIndentation = 0;
-        Integer res = V();
+        Integer res = S();
         if (pos != tokens.size()) {
             System.out.println("L'analyse syntaxique s'est terminé avant l'examen de tous les tokens");
             throw new IncompleteParsingException();
@@ -30,167 +32,162 @@ public class AnalyseSyntaxique   {
 
 	/*
 
-	Traite la dérivation du symbole non-terminal S
+	Traite la dérivation du symbole non-terminal V
 
-	S -> A S'
+	V -> mPIVIP’ | sPIVIP’ | cPIVIVIVIP’ |  pPIVIP’ |  fPIVIVCP’|  tPIVIVCVIVIP’ | cPIVIVIP’
 
 	 */
+public Integer S() throws UnexpectedTokenException {
 
-    private Integer V() throws UnexpectedTokenException {
+    // S -> mPIVIP’
+    if (getTypeDeToken()== TypedeToken.m) {
+        lireToken() ;
+        printToken("m");
+        Integer m = P() ;
 
-        if (getTypeDeToken() == TypedeToken.m) {
+        Integer m1 = I(m) ;
 
-            printToken("m");
-            lireToken();
-            niveauIndentation++;
-            Integer m = M();
-            niveauIndentation--;
-            return S_prime(m);
-        }
+        Integer m2 = V(m1);
 
-        if (getTypeDeToken() == TypedeToken.h) {
+        Integer m3 = I(m2) ;
 
-            printToken("h");
-            lireToken();
-            niveauIndentation++;
-            Integer h = H();
-            niveauIndentation--;
-            return S_prime(h);
-        }
+        Integer m4 = V(m3) ;
 
-        if (getTypeDeToken() == TypedeToken.t) {
+        Integer m5 = I(m4) ;
 
-            printToken("t");
-            lireToken();
-            niveauIndentation++;
-            Integer t = T();
-            niveauIndentation--;
-            return S_prime(t);
-        }
+        Integer m6 = P_prime(m5);
 
-        if (getTypeDeToken() == TypedeToken.p) {
-
-            printToken("p");
-            lireToken();
-            niveauIndentation++;
-            Integer p = P();
-            niveauIndentation--;
-            return S_prime(p);
-        }
-
-        if (getTypeDeToken() == TypedeToken.s) {
-
-            printToken("s");
-            lireToken();
-            niveauIndentation++;
-            Integer s = S();
-            niveauIndentation--;
-            return S_prime(s);
-        }
-
-        if (getTypeDeToken() == TypedeToken.f) {
-
-            printToken("f");
-            lireToken();
-            niveauIndentation++;
-            Integer f = F();
-            niveauIndentation--;
-            return S_prime(f);
-        }
-
-        if (getTypeDeToken() == TypedeToken.c) {
-
-            printToken("c");
-            lireToken();
-            niveauIndentation++;
-            Integer c = C();
-            niveauIndentation--;
-            return S_prime(c);
-        }
-        throw new UnexpectedTokenException("error");
+        CARREAUX.ArrayasList();
+        return F(m6) ;
     }
-    private Integer M () throws UnexpectedTokenException {
 
-        // production M -> (intval ,intval)
-        if (getTypeDeToken() == TypedeToken.parG) {
-            lireToken() ;
-            niveauIndentation++;
-            Integer s = S() ;
-            niveauIndentation--;
+    // S -> hPIVIVIP’
+    if (getTypeDeToken()==TypedeToken.h) {
+        Token t = lireToken() ;
+        printToken("h");
+        Integer h = P();
+         I(h) ;
+        return P_prime(h);
+    }
 
-            if (getTypeDeToken() == TypedeToken.intval) {
+   // S ->  tPIVIVCVIVIP’
+    if (getTypeDeToken()==TypedeToken.t) {
+        Token to = lireToken() ;
+        printToken("t");
 
-                Token t = lireToken();
-                niveauIndentation++;
-                printToken(t.getValeur());
-                niveauIndentation--;
-                Integer i = Integer.valueOf(t.getValeur());
-                return i  ;
+        Integer t = P();
 
-                if (getTypeDeToken() == TypedeToken.virgule) {
+        return P_prime(t);
+    }
+
+    // S -> pPIVIP’
+    if (getTypeDeToken()==TypedeToken.p) {
+        Token t = lireToken() ;
+        printToken("p");
+        Integer p = P();
+        lireToken();
 
 
-                }
+        return P_prime(p);
+    }
 
-                if (getTypeDeToken() == TypedeToken.intval) {
+    // S -> sPIVIP
+    if (getTypeDeToken()==TypedeToken.s) {
+        Token t = lireToken() ;
+        printToken("s");
 
-                    Token t = lireToken();
-                    niveauIndentation++;
-                    printToken(t.getValeur());
-                    niveauIndentation--;
-                    Integer i = Integer.valueOf(t.getValeur());
-                    return i  ;
+        Integer s = P();
 
-            if (getTypeDeToken() == TypedeToken.parD) {
-                lireToken();
-                return V();
-            }
-        }
-        throw new UnexpectedTokenException("error");
-        }
+        return P_prime(s);
+    }
 
-    private Integer S () throws UnexpectedTokenException {
+    // S -> fPIVIVCP’
+    if (getTypeDeToken()==TypedeToken.f) {
+        Token t = lireToken() ;
+        printToken("f");
 
-        //production S -> intVal A'
+        Integer f = P();
+
+        return P_prime(f);
+    }
+
+    // S -> cPIVIVIVIP
+    if (getTypeDeToken()==TypedeToken.c) {
+        Token t = lireToken() ;
+        printToken("c");
+
+        Integer c = P();
+
+        return P_prime(c);
+
+    }
+
+    throw new UnexpectedTokenException("attributs attendu");
+}
+    public Integer I(Integer i) throws UnexpectedTokenException {
         if (getTypeDeToken() == TypedeToken.intval) {
+            Token t = lireToken();
+
+            printToken(String.valueOf(t.getValeur()));
+
+            Integer ii = Integer.valueOf(t.getValeur());
+
+            return V(i);
+        }
+        throw new UnexpectedTokenException(") attendu");
+    }
+
+    public Integer P() throws UnexpectedTokenException {
+        if (getTypeDeToken() == TypedeToken.parG) {
+            Token t = lireToken();
+            printToken("(");
+
+        }
+        throw new UnexpectedTokenException("( attendu");
+    }
+
+    public Integer P_prime(Integer i ) throws UnexpectedTokenException {
+        if (getTypeDeToken() == TypedeToken.parD) {
+            Token t = lireToken();
+            printToken(")");
+
+        }
+        throw new UnexpectedTokenException(") attendu");
+    }
+
+    public Integer C() throws UnexpectedTokenException {
+        if (getTypeDeToken() == TypedeToken.chard) {
+
+            // production A -> intVal A'
 
             Token t = lireToken();
-            niveauIndentation++;
-            printToken(t.getValeur());
-            niveauIndentation--;
-            Integer i = Integer.valueOf(t.getValeur());
-              return i  ;
+
+            printToken(String.valueOf(t.getValeur()));
+
         }
-        throw new UnexpectedTokenException("error");
-    }
-    private Integer F_prime(Integer i) throws UnexpectedTokenException {
-
-        return i ;
+        throw new UnexpectedTokenException("caractère directionnel attendu");
     }
 
+    public Integer F(Integer i) throws UnexpectedTokenException {
+        if (getTypeDeToken() == TypedeToken.parD) {
 
 
-    private Integer S_prime(Integer i) throws UnexpectedTokenException {
+            Integer f = S() ;
+        }
+        if (finAtteinte()) {
 
-      return i ;
+            return i ;
+        }
+        throw new UnexpectedTokenException("relançer ou fin d'entrée attendu");
     }
 
-    private Integer H() throws UnexpectedTokenException {
-    return null ;
+    public Integer V(Integer i ) throws UnexpectedTokenException {
+        if (getTypeDeToken() == TypedeToken.virgule) {
+            Token t = lireToken();
+            printToken(",");
+        }
+        throw new UnexpectedTokenException(", attendu");
     }
-    private Integer T() throws UnexpectedTokenException {
-        return null ;
-    } private Integer P() throws UnexpectedTokenException {
-    return null ;
-    } private Integer S() throws UnexpectedTokenException {
-    return null ;
-    } private Integer F() throws UnexpectedTokenException {
-    return null ;
-}
-    private Integer C() throws UnexpectedTokenException {
-        return null ;
-    }
-
 	/*
 
 	méthodes utilitaires
@@ -236,5 +233,7 @@ public class AnalyseSyntaxique   {
         }
         System.out.println(s);
     }
+
+
 
 }
