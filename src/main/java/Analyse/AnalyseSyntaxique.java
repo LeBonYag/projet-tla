@@ -5,7 +5,6 @@ import tla.*;
 
 import java.util.List;
 
-import static Analyse.TypedeToken.m;
 
 
 public class AnalyseSyntaxique {
@@ -18,11 +17,11 @@ public class AnalyseSyntaxique {
     effectue l'analyse syntaxique à partir de la liste de tokens
     et retourne le noeud racine de l'arbre syntaxique abstrait
      */
-    public Integer analyse(List<Token> tokens) throws Exception {
+    public Noeud  analyse(List<Token> tokens) throws Exception {
         this.pos = 0;
         this.tokens = tokens;
         this.niveauIndentation = 0;
-        Integer res = S();
+        Noeud res = S();
         if (pos != tokens.size()) {
             System.out.println("L'analyse syntaxique s'est terminé avant l'examen de tous les tokens");
             throw new IncompleteParsingException();
@@ -30,6 +29,17 @@ public class AnalyseSyntaxique {
         return res;
     }
 
+    private Noeud Expr() throws UnexpectedTokenException {
+
+        if (getTypeDeToken() == TypedeToken.intval ){
+            return I() ;
+
+        }
+        if (getTypeDeToken() == TypedeToken.chard) {
+            return C() ;
+        }
+        throw new UnexpectedTokenException("intval attendu");
+    }
 	/*
 
 	Traite la dérivation du symbole non-terminal V
@@ -37,107 +47,218 @@ public class AnalyseSyntaxique {
 	V -> mPIVIP’ | sPIVIP’ | cPIVIVIVIP’ |  pPIVIP’ |  fPIVIVCP’|  tPIVIVCVIVIP’ | cPIVIVIP’
 
 	 */
-public Integer S() throws UnexpectedTokenException {
+public Noeud S() throws UnexpectedTokenException {
 
-    // S -> mPIVIP’
+    // S -> m(intval, intval)
     if (getTypeDeToken()== TypedeToken.m) {
         lireToken() ;
-        printToken("m");
-        Integer m = P() ;
 
-        Integer m1 = I(m) ;
+       if (lireToken().getTypeDeToken() != TypedeToken.parG) {
+           throw new UnexpectedTokenException("( attendu");
+       }
+       Noeud n = new Noeud(TypeDeNoeud.m);
+       n.ajout(Expr());
 
-        Integer m2 = V(m1);
+        if (lireToken().getTypeDeToken() != TypedeToken.virgule) {
+            throw new UnexpectedTokenException(" , attendu");
+        }
+        n.ajout(Expr());
 
-        Integer m3 = I(m2) ;
+        if (lireToken().getTypeDeToken() != TypedeToken.parD) {
+            throw new UnexpectedTokenException(") attendu");
+        }
+        n.ajout(F());
 
-        Integer m4 = V(m3) ;
-
-        Integer m5 = I(m4) ;
-
-        Integer m6 = P_prime(m5);
-
-        CARREAUX.ArrayasList();
-        return F(m6) ;
+        return n ;
     }
 
-    // S -> hPIVIVIP’
+    // S -> h(intval , intval)
     if (getTypeDeToken()==TypedeToken.h) {
-        Token t = lireToken() ;
-        printToken("h");
-        Integer h = P();
-         I(h) ;
-        return P_prime(h);
+
+       lireToken() ;
+        if (lireToken().getTypeDeToken() != TypedeToken.parG) {
+            throw new UnexpectedTokenException("( attendu");
+        }
+        Noeud n = new Noeud(TypeDeNoeud.h);
+        n.ajout(Expr());
+
+        if (lireToken().getTypeDeToken() != TypedeToken.virgule) {
+            throw new UnexpectedTokenException(", attendu");
+        }
+        n.ajout(Expr());
+
+        if (lireToken().getTypeDeToken() != TypedeToken.parD) {
+            throw new UnexpectedTokenException(") attendu");
+        }
+        n.ajout(F());
+
+        return n ;
+
+
     }
 
-   // S ->  tPIVIVCVIVIP’
+   // S ->  t(intval , intval , chard , intval , intval)
     if (getTypeDeToken()==TypedeToken.t) {
-        Token to = lireToken() ;
-        printToken("t");
 
-        Integer t = P();
+        lireToken() ;
 
-        return P_prime(t);
+        if (lireToken().getTypeDeToken() != TypedeToken.parG) {
+            throw new UnexpectedTokenException("( attendu");
+        }
+        Noeud n1 = new Noeud(TypeDeNoeud.t);
+        n1.ajout(Expr());
+
+        if (lireToken().getTypeDeToken() != TypedeToken.virgule) {
+            throw new UnexpectedTokenException(", attendu");
+        }
+        n1.ajout(Expr());
+
+        if (lireToken().getTypeDeToken() != TypedeToken.virgule) {
+            throw new UnexpectedTokenException(" attendu");
+        }
+
+        n1.ajout(Expr());
+
+        if (lireToken().getTypeDeToken() != TypedeToken.virgule) {
+            throw new UnexpectedTokenException(", attendu");
+        }
+        n1.ajout(Expr());
+
+        if (lireToken().getTypeDeToken() != TypedeToken.virgule) {
+            throw new UnexpectedTokenException(", attendu");
+        }
+        n1.ajout(Expr());
+
+        if (lireToken().getTypeDeToken() != TypedeToken.parD) {
+            throw new UnexpectedTokenException(") attendu");
+        }
+        n1.ajout(F());
+    return n1 ;
     }
 
-    // S -> pPIVIP’
+    // S -> p(intval , intval)
     if (getTypeDeToken()==TypedeToken.p) {
-        Token t = lireToken() ;
-        printToken("p");
-        Integer p = P();
-        lireToken();
+       lireToken() ;
+
+        if (lireToken().getTypeDeToken() != TypedeToken.parG) {
+            throw new UnexpectedTokenException("( attendu");
+        }
+        Noeud n2 = new Noeud(TypeDeNoeud.p);
+        n2.ajout(Expr());
+
+        if (lireToken().getTypeDeToken() != TypedeToken.virgule) {
+            throw new UnexpectedTokenException(", attendu");
+        }
+        n2.ajout(Expr());
+
+        if (lireToken().getTypeDeToken() != TypedeToken.parD) {
+            throw new UnexpectedTokenException(") attendu");
+        }
+        n2.ajout(F());
+
+        return n2 ;
 
 
-        return P_prime(p);
     }
 
-    // S -> sPIVIP
+    // S -> s(intval,intval)
     if (getTypeDeToken()==TypedeToken.s) {
-        Token t = lireToken() ;
-        printToken("s");
+        lireToken() ;
 
-        Integer s = P();
+        if (lireToken().getTypeDeToken() != TypedeToken.parG) {
+            throw new UnexpectedTokenException("( attendu");
+        }
+        Noeud n3 = new Noeud(TypeDeNoeud.s);
+        n3.ajout(Expr());
 
-        return P_prime(s);
+        if (lireToken().getTypeDeToken() != TypedeToken.virgule) {
+            throw new UnexpectedTokenException(", attendu");
+        }
+        n3.ajout(Expr());
+
+        if (lireToken().getTypeDeToken() != TypedeToken.parD) {
+            throw new UnexpectedTokenException(") attendu");
+        }
+        n3.ajout(F());
+
+        return n3 ;
+
     }
 
     // S -> fPIVIVCP’
     if (getTypeDeToken()==TypedeToken.f) {
-        Token t = lireToken() ;
-        printToken("f");
+         lireToken() ;
 
-        Integer f = P();
+        if (lireToken().getTypeDeToken() != TypedeToken.parG) {
+            throw new UnexpectedTokenException("( attendu");
+        }
+        Noeud n4 = new Noeud(TypeDeNoeud.f);
+        n4.ajout(Expr());
 
-        return P_prime(f);
+        if (lireToken().getTypeDeToken() != TypedeToken.virgule) {
+            throw new UnexpectedTokenException(", attendu");
+        }
+        n4.ajout(Expr());
+
+        if (lireToken().getTypeDeToken() != TypedeToken.virgule) {
+            throw new UnexpectedTokenException(", attendu");
+        }
+        n4.ajout(Expr());
+
+        if (lireToken().getTypeDeToken() != TypedeToken.parD) {
+            throw new UnexpectedTokenException(") attendu");
+        }
+        n4.ajout(F());
+
+        return n4 ;
     }
 
     // S -> cPIVIVIVIP
     if (getTypeDeToken()==TypedeToken.c) {
-        Token t = lireToken() ;
-        printToken("c");
+        lireToken() ;
 
-        Integer c = P();
+        if (lireToken().getTypeDeToken() != TypedeToken.parG) {
+            throw new UnexpectedTokenException("( attendu");
+        }
+        Noeud n5 = new Noeud(TypeDeNoeud.c);
+        n5.ajout(Expr());
 
-        return P_prime(c);
+        if (lireToken().getTypeDeToken() != TypedeToken.virgule) {
+            throw new UnexpectedTokenException(", attendu");
+        }
+        n5.ajout(Expr());
+
+        if (lireToken().getTypeDeToken() != TypedeToken.virgule) {
+            throw new UnexpectedTokenException(", attendu");
+        }
+        n5.ajout(Expr());
+
+        if (lireToken().getTypeDeToken() != TypedeToken.virgule) {
+            throw new UnexpectedTokenException(", attendu");
+        }
+        n5.ajout(Expr());
+
+        if (lireToken().getTypeDeToken() != TypedeToken.parD) {
+            throw new UnexpectedTokenException(") attendu");
+        }
+        n5.ajout(F());
+
+        return n5 ;
 
     }
 
     throw new UnexpectedTokenException("attributs attendu");
 }
-    public Integer I(Integer i) throws UnexpectedTokenException {
+    public Noeud I() throws UnexpectedTokenException {
         if (getTypeDeToken() == TypedeToken.intval) {
             Token t = lireToken();
 
-            printToken(String.valueOf(t.getValeur()));
-
-            Integer ii = Integer.valueOf(t.getValeur());
-
-            return V(i);
+            return new Noeud (TypeDeNoeud.intval, t.getValeur()) ;
         }
-        throw new UnexpectedTokenException(") attendu");
+        throw new UnexpectedTokenException("intval attendu");
     }
 
-    public Integer P() throws UnexpectedTokenException {
+    public Noeud P() throws UnexpectedTokenException {
         if (getTypeDeToken() == TypedeToken.parG) {
             Token t = lireToken();
             printToken("(");
@@ -146,7 +267,7 @@ public Integer S() throws UnexpectedTokenException {
         throw new UnexpectedTokenException("( attendu");
     }
 
-    public Integer P_prime(Integer i ) throws UnexpectedTokenException {
+    public Noeud P_prime(Integer i ) throws UnexpectedTokenException {
         if (getTypeDeToken() == TypedeToken.parD) {
             Token t = lireToken();
             printToken(")");
@@ -155,33 +276,26 @@ public Integer S() throws UnexpectedTokenException {
         throw new UnexpectedTokenException(") attendu");
     }
 
-    public Integer C() throws UnexpectedTokenException {
+    public Noeud C() throws UnexpectedTokenException {
         if (getTypeDeToken() == TypedeToken.chard) {
 
-            // production A -> intVal A'
 
             Token t = lireToken();
 
-            printToken(String.valueOf(t.getValeur()));
+           return new Noeud (TypeDeNoeud.chard,t.getValeur());
 
         }
         throw new UnexpectedTokenException("caractère directionnel attendu");
     }
 
-    public Integer F(Integer i) throws UnexpectedTokenException {
-        if (getTypeDeToken() == TypedeToken.parD) {
+    public Noeud F() throws UnexpectedTokenException {
 
+        if (finAtteinte()) return null ;
 
-            Integer f = S() ;
-        }
-        if (finAtteinte()) {
-
-            return i ;
-        }
-        throw new UnexpectedTokenException("relançer ou fin d'entrée attendu");
+       return S() ;
     }
 
-    public Integer V(Integer i ) throws UnexpectedTokenException {
+    public Noeud V(Integer i ) throws UnexpectedTokenException {
         if (getTypeDeToken() == TypedeToken.virgule) {
             Token t = lireToken();
             printToken(",");

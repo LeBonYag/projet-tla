@@ -24,7 +24,7 @@ public class Test {
         System.out.println("test analyse syntaxique");
         try {
             List<Token> tokens = new AnalyseLexicale().analyse(entree);
-            Integer res = new AnalyseSyntaxique().analyse(tokens);
+           Noeud res = new AnalyseSyntaxique().analyse(tokens);
             System.out.println("La valeur de l'expression " + entree + " est " + res);
         } catch (Exception e) {
             e.printStackTrace(System.out);
