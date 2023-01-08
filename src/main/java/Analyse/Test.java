@@ -4,8 +4,8 @@ import java.util.List;
 
 public class Test {
     public static void main(String[] args) {
-    testAnalyseSyntaxique("m(19,19)");
-    testAnalyseLexicale("m(18,17)");
+    testAnalyseSyntaxique("c(1,2,3,4)");
+    testAnalyseLexicale("v(18,17)");
     }
     private static void testAnalyseLexicale(String entree) {
         System.out.println("test analyse lexicale");

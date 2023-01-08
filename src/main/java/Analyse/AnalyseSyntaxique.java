@@ -79,7 +79,7 @@ public Noeud S() throws UnexpectedTokenException {
         return n ;
     }
 
-    // S -> h(intval , intval)
+    // S -> h(intval , intval , intval)
     if (getTypeDeToken()==TypedeToken.h) {
 
        lireToken() ;
@@ -95,6 +95,12 @@ public Noeud S() throws UnexpectedTokenException {
         }
         Token t1 = lireToken() ;
         n.ajout(new Noeud(TypeDeNoeud.intval , t1.getValeur()));
+
+        if (lireToken().getTypeDeToken() != TypedeToken.virgule) {
+            throw new UnexpectedTokenException(", attendu");
+        }
+        Token t2 = lireToken() ;
+        n.ajout(new Noeud(TypeDeNoeud.intval , t2.getValeur()));
 
         if (lireToken().getTypeDeToken() != TypedeToken.parD) {
             throw new UnexpectedTokenException(") attendu");
@@ -206,7 +212,7 @@ public Noeud S() throws UnexpectedTokenException {
 
     }
 
-    // S -> fPIVIVCP’
+    // S -> f(intval,inval,inval)
     if (getTypeDeToken()==TypedeToken.f) {
          lireToken() ;
 
@@ -227,7 +233,7 @@ public Noeud S() throws UnexpectedTokenException {
             throw new UnexpectedTokenException(", attendu");
         }
         Token t2 = lireToken() ;
-        n4.ajout(new Noeud(TypeDeNoeud.chard , t2.getValeur()));
+        n4.ajout(new Noeud(TypeDeNoeud.intval , t2.getValeur()));
 
         if (lireToken().getTypeDeToken() != TypedeToken.parD) {
             throw new UnexpectedTokenException(") attendu");
@@ -237,7 +243,7 @@ public Noeud S() throws UnexpectedTokenException {
         return n4 ;
     }
 
-    // S -> cPIVIVIVIP
+    // S -> c(intval,intval,intval,intval)
     if (getTypeDeToken()==TypedeToken.c) {
         lireToken();
 
@@ -274,6 +280,7 @@ public Noeud S() throws UnexpectedTokenException {
 
         return n5;
     }
+    // S -> v(inval,intval)
         if (getTypeDeToken()== TypedeToken.v) {
             lireToken() ;
 

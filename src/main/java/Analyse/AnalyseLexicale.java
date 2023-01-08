@@ -41,8 +41,8 @@ public class AnalyseLexicale {
             /*31*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    31 ,   90 ,   90 ,   32 },
             /*32*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    33 ,   90 ,   90 ,   90 },
             /*33*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    33 ,   90 ,   90 ,   34 },
-            /*34*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     35 ,    90 ,   90 ,   90 ,   90 },
-            /*35*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     35 ,    90 ,   90 ,  105 ,   90 },
+            /*34*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    35 ,   90 ,   90 ,   90 },
+            /*35*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    35 ,   90 ,  105 ,   90 },
             /*36*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    90 ,   37 ,   90 ,   90 },
             /*37*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    38 ,   90 ,   90 ,   90 },
             /*38*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    38 ,   90 ,   90 ,   39 },
@@ -147,7 +147,7 @@ public class AnalyseLexicale {
                         tokens.add (new Token(TypedeToken.virgule));
                         tokens.add (new Token(TypedeToken.intval));
                         tokens.add (new Token(TypedeToken.virgule));
-                        tokens.add (new Token(TypedeToken.chard));
+                        tokens.add (new Token(TypedeToken.intval));
                         tokens.add (new Token(TypedeToken.parD));
                         break;
                     case 106:
