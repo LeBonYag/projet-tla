@@ -10,6 +10,7 @@ public enum TypedeToken {
     s,
     f,
     c ,
+    v,
     parD ,
     parG ,
     intval ,

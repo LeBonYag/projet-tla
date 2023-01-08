@@ -6,59 +6,62 @@ import java.util.List;
 public class AnalyseLexicale {
 
     private static Integer TRANSITIONS[][] = {
-                  // espace      m      h      t      p      f      s      c    chard  intval      (      )      ,
-            /*0*/  {      0 ,    1 ,    6 ,   13 ,   24 ,   29 ,   36 ,   41 ,      0 ,     0 ,    0 ,    0 ,    0 },
-            /*1*/  {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    50 ,    2 ,   50 ,   50 },
-            /*2*/  {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,     3 ,   50 ,   50 ,   50 },
-            /*3*/  {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,     3 ,   50 ,   50 ,    4 },
-            /*4*/  {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,     5 ,   50 ,   50 ,   50 },
-            /*5*/  {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,     5 ,   50 ,  101 ,   50 },
-            /*6*/  {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    50 ,    7 ,   50 ,   50 },
-            /*7*/  {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,     8 ,   50 ,   50 ,   50 },
-            /*8*/  {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,     8 ,   50 ,   50 ,    9 },
-            /*9*/  {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    10 ,   50 ,   50 ,   50 },
-            /*10*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    10 ,   50 ,   50 ,   11 },
-            /*11*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    12 ,   50 ,   50 ,   50 },
-            /*12*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    12 ,   50 ,  102  ,  50 },
-            /*13*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    50 ,   14 ,   50 ,   50 },
-            /*14*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    15 ,   50 ,   50 ,   50 },
-            /*15*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    15 ,   50 ,   50 ,   16 },
-            /*16*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    17 ,   50 ,   50 ,   50 },
-            /*17*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    17 ,   50 ,   50 ,   18 },
-            /*18*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     19 ,    50 ,   50 ,   50 ,   50 },
-            /*19*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     19 ,    50 ,   50 ,   50 ,   20 },
-            /*20*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    21 ,   50 ,   50 ,   50 },
-            /*21*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    21 ,   50 ,   50 ,   22 },
-            /*22*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    23 ,   50 ,   50 ,   50 },
-            /*23*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    23 ,   50 ,  103 ,   50 },
-            /*24*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    50 ,   25 ,   50 ,   50 },
-            /*25*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    26 ,   50 ,   50 ,   50 },
-            /*26*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    26 ,   50 ,   50 ,   27 },
-            /*27*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    28 ,   50 ,   50 ,   50 },
-            /*28*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    28 ,   50 ,  104 ,   50 },
-            /*29*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    50 ,   30 ,   50 ,   50 },
-            /*30*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    31 ,   50 ,   50 ,   50 },
-            /*31*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    31 ,   50 ,   50 ,   32 },
-            /*32*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    33 ,   50 ,   50 ,   50 },
-            /*33*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    33 ,   50 ,   50 ,   34 },
-            /*34*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     35 ,    50 ,   50 ,   50 ,   50 },
-            /*35*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     35 ,    50 ,   50 ,  105 ,   50 },
-            /*36*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    50 ,   37 ,   50 ,   50 },
-            /*37*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    38 ,   50 ,   50 ,   50 },
-            /*38*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    38 ,   50 ,   50 ,   39 },
-            /*39*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    40 ,   50 ,   50 ,   50 },
-            /*40*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    40 ,   50 ,  106 ,   50 },
-            /*41*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    50 ,   42 ,   50 ,   50 },
-            /*42*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    43 ,   50 ,   50 ,   50 },
-            /*43*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    43 ,   50 ,   50 ,   44 },
-            /*44*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    45 ,   50 ,   50 ,   50 },
-            /*45*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    45 ,   50 ,   50 ,   46 },
-            /*46*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    47 ,   50 ,   50 ,   50 },
-            /*47*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    47 ,   50 ,   50 ,   48 },
-            /*48*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    49 ,   50 ,   50 ,   50 },
-            /*49*/ {     50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,   50 ,     50 ,    49 ,   50 ,  107 ,   50 },
-
-
+                  // espace      m      h      t      p      f      s      c      v   chard  intval      (      )      ,
+            /*0*/  {      0 ,    1 ,    6 ,   13 ,   24 ,   29 ,   36 ,   41 ,   50,      0 ,     0 ,    0 ,    0 ,    0 },
+            /*1*/  {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    90 ,    2 ,   90 ,   90 },
+            /*2*/  {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,     3 ,   90 ,   90 ,   90 },
+            /*3*/  {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,     3 ,   90 ,   90 ,    4 },
+            /*4*/  {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,     5 ,   90 ,   90 ,   90 },
+            /*5*/  {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,     5 ,   90 ,  101 ,   90 },
+            /*6*/  {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    90 ,    7 ,   90 ,   90 },
+            /*7*/  {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,     8 ,   90 ,   90 ,   90 },
+            /*8*/  {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,     8 ,   90 ,   90 ,    9 },
+            /*9*/  {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    10 ,   90 ,   90 ,   90 },
+            /*10*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    10 ,   90 ,   90 ,   11 },
+            /*11*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    12 ,   90 ,   90 ,   90 },
+            /*12*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    12 ,   90 ,  102  ,  90 },
+            /*13*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    90 ,   14 ,   90 ,   90 },
+            /*14*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    15 ,   90 ,   90 ,   90 },
+            /*15*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    15 ,   90 ,   90 ,   16 },
+            /*16*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    17 ,   90 ,   90 ,   90 },
+            /*17*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    17 ,   90 ,   90 ,   18 },
+            /*18*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     19 ,    90 ,   90 ,   90 ,   90 },
+            /*19*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     19 ,    90 ,   90 ,   90 ,   20 },
+            /*20*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    21 ,   90 ,   90 ,   90 },
+            /*21*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    21 ,   90 ,   90 ,   22 },
+            /*22*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    23 ,   90 ,   90 ,   90 },
+            /*23*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    23 ,   90 ,  103 ,   90 },
+            /*24*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    90 ,   25 ,   90 ,   90 },
+            /*25*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    26 ,   90 ,   90 ,   90 },
+            /*26*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    26 ,   90 ,   90 ,   27 },
+            /*27*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    28 ,   90 ,   90 ,   90 },
+            /*28*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    28 ,   90 ,  104 ,   90 },
+            /*29*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    90 ,   30 ,   90 ,   90 },
+            /*30*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    31 ,   90 ,   90 ,   90 },
+            /*31*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    31 ,   90 ,   90 ,   32 },
+            /*32*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    33 ,   90 ,   90 ,   90 },
+            /*33*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    33 ,   90 ,   90 ,   34 },
+            /*34*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     35 ,    90 ,   90 ,   90 ,   90 },
+            /*35*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     35 ,    90 ,   90 ,  105 ,   90 },
+            /*36*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    90 ,   37 ,   90 ,   90 },
+            /*37*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    38 ,   90 ,   90 ,   90 },
+            /*38*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    38 ,   90 ,   90 ,   39 },
+            /*39*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    40 ,   90 ,   90 ,   90 },
+            /*40*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    40 ,   90 ,  106 ,   90 },
+            /*41*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    90 ,   42 ,   90 ,   90 },
+            /*42*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    43 ,   90 ,   90 ,   90 },
+            /*43*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    43 ,   90 ,   90 ,   44 },
+            /*44*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    45 ,   90 ,   90 ,   90 },
+            /*45*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    45 ,   90 ,   90 ,   46 },
+            /*46*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    47 ,   90 ,   90 ,   90 },
+            /*47*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    47 ,   90 ,   90 ,   48 },
+            /*48*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    49 ,   90 ,   90 ,   90 },
+            /*49*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    49 ,   90 ,  107 ,   90 },
+            /*50*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    90 ,   51 ,   90 ,   90 },
+            /*51*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    52 ,   90 ,   90 ,   90 },
+            /*52*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    52 ,   90 ,   90 ,   53 },
+            /*53*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    54 ,   90 ,   90 ,   90 },
+            /*54*/ {     90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90 ,   90,     90 ,    54 ,   90 ,  108 ,   90 },
     };
 
     private String entree;
@@ -90,7 +93,7 @@ public class AnalyseLexicale {
         do {
             c = lireCaractere();
             Integer prochainEtat = TRANSITIONS[etat][indiceSymbole(c)];
-            if (prochainEtat == 50) {
+            if (prochainEtat == 90) {
                 System.out.println("pas de transition depuis état " + etat + " avec symbole " + c);
                 throw new LexicalErrorException("pas de transition depuis état " + etat + " avec symbole " + c);
             }
@@ -99,26 +102,83 @@ public class AnalyseLexicale {
                 switch (prochainEtat) {
                     case 101:
                         tokens.add(new Token(TypedeToken.m));
+                        tokens.add(new Token(TypedeToken.parG));
+                        tokens.add(new Token(TypedeToken.intval));
+                        tokens.add(new Token(TypedeToken.virgule));
+                        tokens.add(new Token(TypedeToken.intval));
+                        tokens.add(new Token(TypedeToken.parD));
                         break;
                     case 102:
                         tokens.add(new Token(TypedeToken.h));
+                        tokens.add(new Token(TypedeToken.parG));
+                        tokens.add(new Token(TypedeToken.intval));
+                        tokens.add(new Token(TypedeToken.virgule));
+                        tokens.add(new Token(TypedeToken.intval));
+                        tokens.add(new Token(TypedeToken.virgule));
+                        tokens.add(new Token(TypedeToken.intval));
+                        tokens.add(new Token(TypedeToken.parD));
                         break;
                     case 103:
                         tokens.add(new Token(TypedeToken.t));
+                        tokens.add(new Token(TypedeToken.parG));
+                        tokens.add(new Token(TypedeToken.intval));
+                        tokens.add(new Token(TypedeToken.virgule));
+                        tokens.add(new Token(TypedeToken.intval));
+                        tokens.add(new Token(TypedeToken.virgule));
+                        tokens.add(new Token(TypedeToken.chard));
+                        tokens.add(new Token(TypedeToken.virgule));
+                        tokens.add(new Token(TypedeToken.intval));
+                        tokens.add(new Token(TypedeToken.virgule));
+                        tokens.add(new Token(TypedeToken.intval));
+                        tokens.add(new Token(TypedeToken.parD));
                         break;
                     case 104:
                         tokens.add(new Token(TypedeToken.p));
+                        tokens.add(new Token(TypedeToken.parG));
+                        tokens.add(new Token(TypedeToken.intval));
+                        tokens.add(new Token(TypedeToken.virgule));
+                        tokens.add(new Token(TypedeToken.intval));
+                        tokens.add(new Token(TypedeToken.parD));
                         break;
                     case 105:
                         tokens.add(new Token(TypedeToken.f));
+                        tokens.add (new Token(TypedeToken.parG));
+                        tokens.add (new Token(TypedeToken.intval));
+                        tokens.add (new Token(TypedeToken.virgule));
+                        tokens.add (new Token(TypedeToken.intval));
+                        tokens.add (new Token(TypedeToken.virgule));
+                        tokens.add (new Token(TypedeToken.chard));
+                        tokens.add (new Token(TypedeToken.parD));
                         break;
                     case 106:
                         tokens.add(new Token(TypedeToken.s));
+                        tokens.add(new Token(TypedeToken.parG));
+                        tokens.add(new Token(TypedeToken.intval));
+                        tokens.add(new Token(TypedeToken.virgule));
+                        tokens.add(new Token(TypedeToken.intval));
+                        tokens.add(new Token(TypedeToken.parD));
                         break;
                     case 107:
                         tokens.add(new Token(TypedeToken.c));
+                        tokens.add(new Token(TypedeToken.parG));
+                        tokens.add(new Token(TypedeToken.intval));
+                        tokens.add(new Token(TypedeToken.virgule));
+                        tokens.add(new Token(TypedeToken.intval));
+                        tokens.add(new Token(TypedeToken.virgule));
+                        tokens.add(new Token(TypedeToken.intval));
+                        tokens.add(new Token(TypedeToken.virgule));
+                        tokens.add(new Token(TypedeToken.intval));
+                        tokens.add(new Token(TypedeToken.parD));
                         break;
-                    case 50 :
+
+                    case 108:
+                        tokens.add(new Token(TypedeToken.v));
+                        tokens.add(new Token(TypedeToken.parG));
+                        tokens.add(new Token(TypedeToken.intval));
+                        tokens.add(new Token(TypedeToken.virgule));
+                        tokens.add(new Token(TypedeToken.intval));
+                        tokens.add(new Token(TypedeToken.parD));
+                    case 90 :
                      break;
 
                 }
@@ -179,16 +239,18 @@ public class AnalyseLexicale {
             return 6;
         if (c == 'c')
             return 7;
-        if (Character.isLetter(c))
+        if (c == 'v')
             return 8;
-        if (Character.isDigit(c))
+        if (Character.isLetter(c))
             return 9;
-        if (c == '(')
+        if (Character.isDigit(c))
             return 10;
-        if (c == ')')
+        if (c == '(')
             return 11;
-        if (c == ',')
+        if (c == ')')
             return 12;
+        if (c == ',')
+            return 13;
         System.out.println("Symbole inconnu : " + c);
         throw new IllegalCharacterException(c.toString());
     }

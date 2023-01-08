@@ -29,16 +29,9 @@ public class Interpretation {
 	public Integer interpreter(Noeud n) {
 
 		switch(n.getTypeDeNoeud()) {
-			case statement:
-				interpreter(n.enfant(0));
-				if (n.nombreEnfants()>1) {
-					interpreter(n.enfant(1));
-				}
-				return null;
-			case kInput: {
-				/* demande la saisie au clavier d'un nombre et stocke sa valeur dans HashMap<String, Integer> variables
-				la clé de stockage est un identifiant qui se trouve le fils de ce noeud kInput
-				 */
+
+			case m: {
+
 				String name = n.enfant(0).getValeur();
 				System.out.println("Veuillez entrer une valeur pour " +name + " :");
 				try {
@@ -50,26 +43,26 @@ public class Interpretation {
 				/* les instructions kInput et kPrint ne retourne pas de valeur */
 				return null;
 			}
-			case kPrint:
+			case h:
 				/* affiche le resultat de l'évaluation du fils de ce noeud kPrint */
 				System.out.println(interpreter(n.enfant(0)));
 				/* les instructions kInput et kPrint ne retourne pas de valeur */
 				return null;
-			case multiply:
+			case t:
 				/* retourne le produit entre le 1e fils du noeud et le 2e */
 				return interpreter(n.enfant(0)) * interpreter(n.enfant(1));
-			case add:
+			case p:
 				/* retourne la somme entre le 1e fils du noeud et le 2e */
 				return interpreter(n.enfant(0)) + interpreter(n.enfant(1));
-			case kPow: {
+			case s: {
 				/* retourne la puissance avec pour facteur le 1e fils du noeud et pour exposant le 2e fils */
 				double d = Math.pow(interpreter(n.enfant(0)), interpreter(n.enfant(1)));
 				return Double.valueOf(d).intValue();
 			}
-			case intVal:
+			case f:
 				/* retourne la valeur d'entier litéral */
 				return Integer.valueOf(n.getValeur());
-			case ident:
+			case c:
 				/* retourne la valeur d'une variable (désignée par son identifiant) */
 				return variables.get(n.getValeur());
 		}

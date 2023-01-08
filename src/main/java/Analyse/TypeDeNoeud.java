@@ -1,7 +1,7 @@
 package Analyse;
 
 public enum TypeDeNoeud {
-	statement,
+
 	m,
 	h,
 	t,
@@ -9,9 +9,9 @@ public enum TypeDeNoeud {
 	s,
 	f,
 	c ,
-	parD ,
-	parG ,
+	v,
 	intval ,
-	chard ,
-	virgule
+	chard
+
+
 }
