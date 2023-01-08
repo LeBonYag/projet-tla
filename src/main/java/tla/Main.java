@@ -27,6 +27,8 @@ public class Main extends Application {
         menuPane.add(btnNiveau2, 0, 2);
         Button btnNiveau3 = new Button("niveau 3");
         menuPane.add(btnNiveau3, 0, 3);
+        Button btnNiveau4 = new Button("niveau 4");
+        menuPane.add(btnNiveau4, 0, 4);
         ImageView imageView = new ImageView(LibrairieImages.imgJoueurGrand);
         menuPane.add(imageView, 1, 0, 1, 5);
 
@@ -64,6 +66,13 @@ public class Main extends Application {
         btnNiveau3.setOnAction(event -> {
             scene.setRoot(borderPane);
             plateau.setNiveau(new Niveau3());
+            plateau.start();
+            primaryStage.sizeToScene();
+        });
+
+        btnNiveau4.setOnAction(event -> {
+            scene.setRoot(borderPane);
+            plateau.setNiveau(new Niveau4());
             plateau.start();
             primaryStage.sizeToScene();
         });
