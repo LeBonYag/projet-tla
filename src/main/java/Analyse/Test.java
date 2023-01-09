@@ -1,5 +1,7 @@
 package Analyse;
 
+import tla.FileReader;
+
 import java.util.List;
 
 public class Test {

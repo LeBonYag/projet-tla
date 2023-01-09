@@ -1,76 +1,26 @@
 package tla;
 
-import java.util.Arrays;
-
-import static tla.Direction.*;
+import java.io.File;
 
 class Niveau1 extends Niveau {
 
-    Niveau1() {
-        INIT_CARREAUX =
-            "     #       #      " +
-            "#### # ##### # #### " +
-            "     #   # # #    # " +
-            " ####### # # ## # # " +
-            "       # # #    # # " +
-            " ##### # # ###### # " +
-            " #       #        # " +
-            " # ######### ###### " +
-            " # #    *  # # #    " +
-            " # # ##### # # # ###" +
-            " # #     # # # #    " +
-            "   ##### # # # #### " +
-            "## #     #   #      " +
-            "   #################";
 
-        TRAPPES = Arrays.asList(
-                new Trappe(3, 0, DROITE, 10, 2),
-                new Trappe(5, 4, GAUCHE, 8, 6)
-        );
+    private File file = new File("E:\\NaverSeriesApp\\projet-tla-master\\src\\main\\resources\\lvl1.txt");
 
-        fantomes = Arrays.asList(
-                new Fantome(8,4, Arrays.asList(
-                        BAS,
-                        BAS,
-                        GAUCHE,
-                        GAUCHE,
-                        GAUCHE,
-                        GAUCHE,
-                        GAUCHE
-                )),
-                new Fantome(0,11, Arrays.asList(
-                        DROITE,
-                        DROITE,
-                        BAS,
-                        BAS,
-                        GAUCHE,
-                        GAUCHE,
-                        DROITE,
-                        DROITE,
-                        HAUT,
-                        HAUT,
-                        GAUCHE,
-                        GAUCHE
-                )),
-                new Fantome(12,7, Arrays.asList(
-                        BAS,
-                        BAS,
-                        BAS,
-                        BAS
-                ))
-        );
+    Niveau1() throws Exception {
+        INIT_CARREAUX = new FileReader().readLevel(file);
 
-        commutateurs = Arrays.asList(
-                new Commutateur(3,2)
-        );
+        CHRONOS = new FileReader().readChrono(file);
 
-        CHRONOS = Arrays.asList(
-                new Chrono(1, 0, 40)
-        );
+        TRAPPES = new FileReader().readTrappe(file);
+
+        fantomes = new FileReader().readFantome(file);
+
+        commutateurs = new FileReader().readCommu(file);
 
     }
 
     void hookApresDeplacement(Plateau plateau) {
         plateau.carreaux[190].setEtat(commutateurs.get(0).getEtat() ? EtatCarreau.VIDE : EtatCarreau.PORTE_FERMEE);
-    };
+    }
 }
