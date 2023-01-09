@@ -11,7 +11,7 @@ public class Interpretation {
 	private static BufferedReader stdinReader = new BufferedReader(new InputStreamReader(System.in));
 
 	// stocke les variables lues au clavier durant l'interprétation
-	private HashMap<String, Integer> variables;
+	private static HashMap<String, Integer> variables;
 
 	public Interpretation() {
 		variables = new HashMap<>();
@@ -26,21 +26,13 @@ public class Interpretation {
 	  la valeur de l'expression si le noeud est une expression
 
 	 */
-	public Integer interpreter(Noeud n) {
+	public static Integer interpreter(Noeud n) {
 
 		switch(n.getTypeDeNoeud()) {
 
-			case m: {
-
-				String name = n.enfant(0).getValeur();
-				System.out.println("Veuillez entrer une valeur pour " +name + " :");
-				try {
-					String s = stdinReader.readLine();
-					variables.put(name, Integer.valueOf(s));
-				} catch (IOException e) {
-					e.printStackTrace(System.out);
-				}
-				/* les instructions kInput et kPrint ne retourne pas de valeur */
+			case m:
+			{
+				System.out.println(interpreter(n.enfant(0)));
 				return null;
 			}
 			case h:

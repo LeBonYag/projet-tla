@@ -83,6 +83,7 @@ public class Plateau {
 
         pane.getChildren().clear();
 
+        chronoEtat = false;
         // création des carreaux
 
         for(int y = 0; y < HAUTEUR_PLATEAU; y++) {
@@ -147,6 +148,7 @@ public class Plateau {
     void stop() {
         // passe à l'état 'jeu terminé'
         jeuEnCours = false;
+        chronoEtat = false;
     }
 
 

@@ -25,8 +25,6 @@ public class Main extends Application {
         menuPane.add(btnNiveau1, 0, 1);
         Button btnNiveau2 = new Button("niveau 2");
         menuPane.add(btnNiveau2, 0, 2);
-        Button btnNiveau3 = new Button("niveau 3");
-        menuPane.add(btnNiveau3, 0, 3);
         ImageView imageView = new ImageView(LibrairieImages.imgJoueurGrand);
         menuPane.add(imageView, 1, 0, 1, 5);
 
@@ -45,7 +43,11 @@ public class Main extends Application {
             scene.setRoot(borderPane);
 
             // affecte un object correspondant au niveau choisi
-            plateau.setNiveau(new Niveau1());
+            try {
+                plateau.setNiveau(new Niveau1());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             // démarre le jeu
             plateau.start();
@@ -56,14 +58,11 @@ public class Main extends Application {
 
         btnNiveau2.setOnAction(event -> {
             scene.setRoot(borderPane);
-            plateau.setNiveau(new Niveau2());
-            plateau.start();
-            primaryStage.sizeToScene();
-        });
-
-        btnNiveau3.setOnAction(event -> {
-            scene.setRoot(borderPane);
-            plateau.setNiveau(new Niveau3());
+            try {
+                plateau.setNiveau(new Niveau2());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             plateau.start();
             primaryStage.sizeToScene();
         });
